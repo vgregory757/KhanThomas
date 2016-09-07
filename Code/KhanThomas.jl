@@ -518,8 +518,7 @@ function equilibrium_conditions(vars::Vector)
 end
 
 # compute Jacobian of equilibrium_conditions at steady state
-@time j = ForwardDiff.jacobian(equilibrium_conditions)
-@time derivs = j(vars)
+@time derivs = ForwardDiff.jacobian(equilibrium_conditions, vars)
 
 # unpackage the partial derivatives
 mVarsDerivs = derivs[:,1:eg.nVars];
