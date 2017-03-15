@@ -216,7 +216,7 @@ function labor_demand(eg::KTModel, w::Float64, k::Matrix{Float64}, ϵ::Matrix{Fl
 end
 
 # envelope condition: π' = v'
-function envelope(eg::KTModel, k::Matrix{Float64}, i::Matrix{Float64})
+function envelope(eg::KTModel, k::Vector{Float64}, i::Vector{Float64})
   env = 1 + (eg.χ1 .* i)./k
   return env
 end
@@ -609,7 +609,7 @@ N = T/dt
 N = round(Int, N)
 
 vAggregateShock = zeros(N, 1)
-vAggregateShock[1:1/dt, 1] = 0.1
+vAggregateShock[1:convert(Int64, 1/dt), 1] = 0.1
 
 @time agg_series, state_series = simulate(eg, eg_ss, vAggregateShock, G1, impact, N, dt)
 
